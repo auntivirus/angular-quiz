@@ -1,0 +1,18 @@
+<div class="container bg-dark mt-5 py-3 rounded text-white">
+  <h1 class="display-5 fw-bold">This is THE 'quiz app'.</h1>
+  <p class="col-md-8" style="font-style: italic;">Quiz will contain 10 questions. Each holding 10 points.</p>
+  <h4>Rules:</h4>
+  <ul>
+    <li class="text-danger">Refreshing the page WILL reset the quiz!</li>
+    <li class="text-warning">Incorrect Answer: -10 points!</li>
+    <li class="text-success">Correct Answer: 10 points!</li>
+    <li>You will have 30 seconds to answer each questions.</li>
+  </ul>
+  <hr>
+  <div class="name col-md-4 my-3">
+    <label for="">Your Name</label>
+    <input #username type="text" placeholder="Enter your name..." class="form-control mt-2">
+  </div>
+  <button class="btn btn-primary btn-lg" routerLink="/question" style=" margin-left: 19%;" (click)="startQuiz()">Start the Quiz!</button>
+  <h1 class="text-center mt-3" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"><i class="fa-regular fa-thumbs-up"></i> Good Luck <i class="fa-regular fa-thumbs-up"></i></h1>
+</div>
