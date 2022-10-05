@@ -7,10 +7,12 @@
       </div>
       <div class="quiz-header">
         <h4 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">Angular & TypeScript quizes</h4>
-        <span>Welcome {{name}}</span>
+        <span *ngIf="name">Welcome {{name}}</span>
       </div>
     </div>
-    <!-- Points, Questions Remain, Timer -->
+
+    <ng-container *ngIf="!isCompleted">
+      <!-- Points, Questions Remain, Timer -->
     <div class="d-flex justify-content-around">
       <div class="score">
         <h4>{{points}} points</h4>
@@ -34,7 +36,7 @@
     <div class="options">
       <ol *ngFor="let option of questionList[currentQuestion]?.options">
         <li (click)="selectedAnswer(currentQuestion+1,option)">
-          <div class="card">
+          <div appChangeBg [isCorrect]="option.correct" class="card">
             {{option.text}}
           </div>
         </li>
@@ -45,5 +47,19 @@
       <button (click)="resetQuiz()" class="btn"><i class="fa-solid fa-rotate-right fa-2x"></i></button>
       <button [disabled]="currentQuestion === questionList.length-1" class="btn" (click)="nextQuestion()"><i class="fa-solid fa-chevron-right fa-2x"></i></button>
     </div>
+    </ng-container>
+
+    <ng-container *ngIf="isCompleted" >
+      <div class="d-flex justify-content-between" style="padding: 50px;">
+          <iframe src="https://embed.lottiefiles.com/animation/62717"></iframe>
+        <div class="result text-center col-md-6 col-sm-12">
+          <h3>Congratulaions! <br>You have completed the quiz.<br> Here is your result:</h3>
+          <p>Total Question Attempted: {{questionList.length}}</p>
+          <p>Total Correct Answered: {{correctAnswer}}</p>
+          <p>Total Incorrect Answered: {{incorrectAnswer}}</p>
+          <p>Your Score: {{points}} Points</p>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </div>

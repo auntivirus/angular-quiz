@@ -17,6 +17,7 @@ export class QuestionComponent implements OnInit {
   incorrectAnswer: number = 0;
   interval$: any;
   progress: string = "0";
+  isCompleted: boolean = false;
 
   constructor(private questionService: QuestionService) { };
 
@@ -42,19 +43,35 @@ export class QuestionComponent implements OnInit {
   };
 
   selectedAnswer(currentQuestion: number, option: any) {
+    if(currentQuestion === this.questionList.length)
+    {
+      setTimeout(() => {
+        this.currentQuestion++;
+        this.resetCounter();
+        this.getProgressPercentage();
+      }, 1000);
+      this.isCompleted = true;
+      this.stopCounter();
+    }
     if(option.correct)
     {
       this.points += 10;
-      this.currentQuestion++;
       this.correctAnswer++;
-      this.getProgressPercentage();
+      setTimeout(() => {
+        this.currentQuestion++;
+        this.resetCounter();
+        this.getProgressPercentage();
+      }, 1000);
     }
     else
     {
-      this.getProgressPercentage();
+      setTimeout(() => {
+        this.currentQuestion++;
+        this.incorrectAnswer++;
+        this.resetCounter();
+        this.getProgressPercentage();
+      },1000);
       this.points -= 10;
-      this.incorrectAnswer++;
-      this.currentQuestion++;
     }
   };
 
